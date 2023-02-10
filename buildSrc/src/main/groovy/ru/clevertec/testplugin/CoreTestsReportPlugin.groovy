@@ -9,8 +9,8 @@ class CoreTestsReportPlugin implements Plugin<Project> {
 
     private static final String TEST_REPORTS_DIRECTORY = 'test_report'
     private static final String CORE_TESTS_PATH = 'ru.clevertec.core*';
-    private static final String UTILS_TEST_REPORTS_PATH = 'build/reports/tests/utilsTest'
-    private static final String UTILS_TEST = 'utilsTest'
+    private static final String CORE_TESTS_REPORT_PATH = 'build/reports/tests/coreTests'
+    private static final String CORE_TESTS = 'coreTests'
     private static final String TEST_REPORT = 'testReport'
     private static final String SEPARATOR = '/';
 
@@ -18,15 +18,15 @@ class CoreTestsReportPlugin implements Plugin<Project> {
     void apply(Project project) {
 
         project.tasks.register(TEST_REPORT, Copy) {
-            dependsOn(UTILS_TEST)
+            dependsOn(CORE_TESTS)
             onlyIf {
                 project.rootProject.file(TEST_REPORTS_DIRECTORY).exists()
             }
-            from UTILS_TEST_REPORTS_PATH
+            from CORE_TESTS_REPORT_PATH
             into project.getRootDir().toString() + SEPARATOR + TEST_REPORTS_DIRECTORY
         }
 
-        project.tasks.register(UTILS_TEST, Test).configure() {
+        project.tasks.register(CORE_TESTS, Test).configure() {
             doFirst {
                 filter {
                     includeTestsMatching(CORE_TESTS_PATH)
