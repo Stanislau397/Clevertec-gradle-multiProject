@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'groovy'
+}
+
+allprojects {
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(8))
+        }
+    }
+
+    version '1.3.5'
+
+    jar {
+        manifest {
+            attributes("Project-name" : project.name,
+                    'Project-version' : project.version)
+        }
+    }
+}
