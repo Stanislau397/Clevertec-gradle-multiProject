@@ -9,14 +9,10 @@ repositories {
 }
 
 dependencies {
+    implementation project.rootProject.fileTree(dir: 'lib', include: ['*.jar'])
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'org.apache.commons:commons-lang3:3.0'
-    implementation fileTree(dir: 'lib', include: ['*.jar'])
-}
-
-tasks.withType(Test) {
-    useJUnitPlatform()
 }
 
 apply plugin: CoreTestsReportPlugin
